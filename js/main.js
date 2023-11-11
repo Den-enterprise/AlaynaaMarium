@@ -107,3 +107,35 @@
     
 })(jQuery);
 
+const carousel = document.querySelector('.slideshow');
+const slideImgs = document.querySelectorAll('.slides img');
+const navBtns = document.querySelector('.nav').querySelectorAll('button');
+
+let currSlideIndex = 0;
+
+function showSlide(slideIndex) {
+  slideImgs.forEach((slideImg, index) => {
+    slideImg.style.opacity = 0;
+    if (index === slideIndex) {
+      slideImg.style.opacity = 1;
+    }
+  });
+}
+
+showSlide(currSlideIndex);
+
+navBtns[0].addEventListener('click', () => {
+  currSlideIndex--;
+  if (currSlideIndex < 0) {
+    currSlideIndex = slideImgs.length - 1;
+  }
+  showSlide(currSlideIndex);
+});
+
+navBtns[1].addEventListener('click', () => {
+  currSlideIndex++;
+  if (currSlideIndex >= slideImgs.length) {
+    currSlideIndex = 0;
+  }
+  showSlide(currSlideIndex);
+});
